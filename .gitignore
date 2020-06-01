@@ -1,0 +1,10 @@
+.terraform/
+tf/terraform
+tf/.terraform
+tf/ocp-dev-optical-mode-277107.json
+ocp/ocp-dev/ssh/
+ocp/ocp-dev/auth/
+ocp/openshift-install
+ocp/ocp-dev/.openshift_install.log
+ocp/ocp-dev/.openshift_install_state.json
+ocp/ocp-dev/install-config.yaml.bak
