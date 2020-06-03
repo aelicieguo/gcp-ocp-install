@@ -66,7 +66,7 @@ resource "google_dns_record_set" "ocp-etcd" {
 
 # OCP BootStrap DNS Entry in Private DNS Zone
 resource "google_dns_record_set" "bootstrap-dns" {
-  name = "${var.ocp_infra_id}-bootstrap.{google_dns_managed_zone.private-zone.dns_name}"
+  name = "${var.ocp_infra_id}-bootstrap.${google_dns_managed_zone.private-zone.dns_name}"
   type = "A"
   ttl = 60
   managed_zone = google_dns_managed_zone.private-zone.name
