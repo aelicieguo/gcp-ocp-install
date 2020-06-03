@@ -2,6 +2,14 @@ variable "ocp_infra_id" {
   type = string
 }
 
+variable "ocp_ign_ip" {
+  type = string
+}
+
+variable "ocp_int_ip" {
+  type = string
+}
+
 variable "gcp_region" {
   type = string
 }

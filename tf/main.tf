@@ -19,6 +19,8 @@ module "vpc" {
 module "lb" {
   source = "./modules/lb"
   ocp_infra_id = var.ocp_infra_id
+  ocp_ign_ip = var.ocp_ign_ip
+  ocp_int_ip = var.ocp_int_ip
   gcp_region = var.gcp_region
   gcp_network = module.vpc.gcp_network.self_link
   master_subnet = module.vpc.master_subnet.self_link
@@ -32,15 +34,17 @@ module "dns" {
   ocp_infra_id = var.ocp_infra_id
   ocp_cluster_name = var.ocp_cluster_name
   gcp_master_count = var.gcp_master_count
+  ocp_ign_ip = var.ocp_ign_ip
+  ocp_int_ip = var.ocp_int_ip
   gcp_master_ip = var.gcp_master_ip
   gcp_compute_count = var.gcp_compute_count
   gcp_compute_ip = var.gcp_compute_ip
   gcp_infra_count = var.gcp_infra_count
   gcp_infra_ip = var.gcp_infra_ip
   gcp_network = module.vpc.gcp_network.self_link
-  cluster_public_ip = module.lb.cluster_public_ip.address
-  cluster_private_ip = module.lb.cluster_private_ip.address
+  ocp_api_public_ip = module.lb.ocp_api_public_ip.address
   wildcard_public_ip = module.lb.wildcard_public_ip.address
+  ssl_wildcard_public_ip = module.lb.ssl_wildcard_public_ip.address
 }
 
 module "firewall" {
@@ -50,7 +54,7 @@ module "firewall" {
   gcp_master_subnet = var.gcp_master_subnet
   gcp_compute_subnet = var.gcp_compute_subnet
   gcp_network = module.vpc.gcp_network.self_link
-  cluster_public_ip = module.lb.cluster_public_ip.address
+  ocp_int_ip = var.ocp_int_ip
 }
 
 module "iam" {
@@ -70,6 +74,7 @@ module "bootstrap" {
   source = "./modules/bootstrap"
   ocp_infra_id = var.ocp_infra_id
   gcp_bootstrap_machine_type = var.gcp_bootstrap_machine_type
+  gcp_bootstrap_ip = var.gcp_bootstrap_ip
   gcp_availability_zones = var.gcp_availability_zones
   gcp_bootstrap_root_volume_size = var.gcp_bootstrap_root_volume_size
   bootstrap_ign = module.rhcos.bootstrap_ign.self_link

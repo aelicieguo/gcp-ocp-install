@@ -18,6 +18,6 @@ variable "gcp_network" {
   type = string
 }
 
-variable "cluster_public_ip" {
+variable "ocp_int_ip" {
   type = string
 }

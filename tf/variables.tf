@@ -44,6 +44,17 @@ variable "gcp_infra_count" {
 }
 
 ####################################################################
+# LB
+
+variable "ocp_int_ip" {
+  type = string
+}
+
+variable "ocp_ign_ip" {
+  type = string
+}
+
+####################################################################
 # DNS 
 
 variable "ocp_cluster_name" {
@@ -56,6 +67,10 @@ variable "ocp_base_domain" {
 
 ####################################################################
 # BOOTSTRAP
+
+variable "gcp_bootstrap_ip" {
+  type = string
+}
 
 variable "gcp_bootstrap_machine_type" {
   type = string

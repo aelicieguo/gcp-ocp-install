@@ -10,15 +10,23 @@ variable "ocp_base_domain" {
   type = string
 }
 
-variable "cluster_public_ip" {
+variable "ocp_api_public_ip" {
   type = string
 }
 
-variable "cluster_private_ip" {
+variable "ocp_ign_ip" {
+  type = string
+}
+
+variable "ocp_int_ip" {
   type = string
 }
 
 variable "wildcard_public_ip" {
+  type = string
+}
+
+variable "ssl_wildcard_public_ip" {
   type = string
 }
 

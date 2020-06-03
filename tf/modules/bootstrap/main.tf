@@ -44,6 +44,7 @@ resource "google_compute_instance" "bootstrap-instance" {
 
   network_interface {
     subnetwork = var.master_subnet
+    network_ip = var.gcp_bootstrap_ip
     access_config {
       nat_ip = google_compute_address.bootstrap-ip.address
     }

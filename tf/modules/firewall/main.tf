@@ -22,7 +22,7 @@ resource "google_compute_firewall" "mcs" {
     ports    = ["22623"]
   }
 
-  source_ranges = [var.cluster_public_ip]
+  source_ranges = [var.ocp_int_ip]
   target_tags = ["${var.ocp_infra_id}-master"]
 }
 

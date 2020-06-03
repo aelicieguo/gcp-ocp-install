@@ -6,6 +6,10 @@ variable "ocp_infra_id" {
   type = string
 }
 
+variable "gcp_bootstrap_ip" {
+  type = string
+}
+
 variable "gcp_bootstrap_machine_type" {
   type = string
 }

@@ -23,7 +23,7 @@ resource "google_dns_record_set" "public-wildcard" {
   type = "A"
   ttl = 60
   managed_zone = google_dns_managed_zone.public-zone.name
-  rrdatas = [var.wildcard_public_ip]
+  rrdatas = [var.wildcard_public_ip,var.ssl_wildcard_public_ip]
 }
 
 # OCP API DNS Entry in Public DNS Zone
@@ -32,7 +32,7 @@ resource "google_dns_record_set" "public-api" {
   type = "A"
   ttl = 60
   managed_zone = google_dns_managed_zone.public-zone.name
-  rrdatas = [var.cluster_public_ip]
+  rrdatas = [var.ocp_api_public_ip]
 }
 
 # OCP API DNS Entry in Private DNS Zone
@@ -41,7 +41,7 @@ resource "google_dns_record_set" "private-api" {
   type = "A"
   ttl = 60
   managed_zone = google_dns_managed_zone.private-zone.name
-  rrdatas = [var.cluster_public_ip]
+  rrdatas = [var.ocp_int_ip]
 }
 
 # OCP API-INT DNS Entry in Private DNS Zone
@@ -50,7 +50,7 @@ resource "google_dns_record_set" "private-api-int" {
   type = "A"
   ttl = 60
   managed_zone = google_dns_managed_zone.private-zone.name
-  rrdatas = [var.cluster_private_ip]
+  rrdatas = [var.ocp_int_ip,var.ocp_ign_ip]
 }
 
 # OCP ETCD DNS Entry in Private DNS Zone

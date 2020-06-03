@@ -13,12 +13,15 @@ gcp_cluster_network_cidr = "10.0.0.0/16"
 ocp_cluster_name = "ocp-dev"
 ocp_infra_id = "ocp-de-fqlz9"
 ocp_base_domain = "aelicie.xyz"
+ocp_int_ip = "10.0.15.10"
+ocp_ign_ip = "10.0.15.20"
 
 ####################################################################
 # Bootstrap
 
 gcp_bootstrap_machine_type = "n1-standard-2"
 gcp_bootstrap_root_volume_size = "120"
+gcp_bootstrap_ip = "10.0.15.2"
 
 ####################################################################
 # Control Plane
