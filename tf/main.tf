@@ -36,6 +36,7 @@ module "dns" {
   gcp_master_count = var.gcp_master_count
   ocp_ign_ip = var.ocp_ign_ip
   ocp_int_ip = var.ocp_int_ip
+  gcp_bootstrap_ip = var.gcp_bootstrap_ip
   gcp_master_ip = var.gcp_master_ip
   gcp_compute_count = var.gcp_compute_count
   gcp_compute_ip = var.gcp_compute_ip

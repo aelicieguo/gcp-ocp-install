@@ -64,35 +64,44 @@ resource "google_dns_record_set" "ocp-etcd" {
   count = var.gcp_master_count
 }
 
-## OCP Control Planes DNS Entry in Private DNS Zone
-#resource "google_dns_record_set" "master-dns" {
-#  name = "${var.ocp_infra_id}-master-${count.index+1}"
-#  type = "A"
-#  ttl = 60
-#  managed_zone = google_dns_managed_zone.private-zone.name
-#  rrdatas = [element(var.gcp_master_ip, count.index)]
-#
-#  count = var.gcp_master_count
-#}
+# OCP BootStrap DNS Entry in Private DNS Zone
+resource "google_dns_record_set" "bootstrap-dns" {
+  name = "${var.ocp_infra_id}-bootstrap.{google_dns_managed_zone.private-zone.dns_name}"
+  type = "A"
+  ttl = 60
+  managed_zone = google_dns_managed_zone.private-zone.name
+  rrdatas = [var.gcp_bootstrap_ip]
+}
 
-## OCP Compute DNS Entry in Private DNS Zone
-#resource "google_dns_record_set" "worker-dns" {
-#  name = "${var.ocp_infra_id}-compute-${count.index+1}"
-#  type = "A"
-#  ttl = 60
-#  managed_zone = google_dns_managed_zone.private-zone.name
-#  rrdatas = [element(var.gcp_compute_ip, count.index)]
-#
-#  count = var.gcp_compute_count
-#}
+# OCP Control Planes DNS Entry in Private DNS Zone
+resource "google_dns_record_set" "master-dns" {
+  name = "${var.ocp_infra_id}-master-${count.index+1}.${google_dns_managed_zone.private-zone.dns_name}"
+  type = "A"
+  ttl = 60
+  managed_zone = google_dns_managed_zone.private-zone.name
+  rrdatas = [element(var.gcp_master_ip, count.index)]
 
-## OCP Infra DNS Entry in Private DNS Zone
-#resource "google_dns_record_set" "infra-dns" {
-#  name = "${var.ocp_infra_id}-infra-${count.index+1}"
-#  type = "A"
-#  ttl = 60
-#  managed_zone = google_dns_managed_zone.private-zone.name
-#  rrdatas = [element(var.gcp_infra_ip, count.index)]
+  count = var.gcp_master_count
+}
 
-#  count = var.gcp_infra_count
-#}
+# OCP Compute DNS Entry in Private DNS Zone
+resource "google_dns_record_set" "worker-dns" {
+  name = "${var.ocp_infra_id}-compute-${count.index+1}.${google_dns_managed_zone.private-zone.dns_name}"
+  type = "A"
+  ttl = 60
+  managed_zone = google_dns_managed_zone.private-zone.name
+  rrdatas = [element(var.gcp_compute_ip, count.index)]
+
+  count = var.gcp_compute_count
+}
+
+# OCP Infra DNS Entry in Private DNS Zone
+resource "google_dns_record_set" "infra-dns" {
+  name = "${var.ocp_infra_id}-infra-${count.index+1}.${google_dns_managed_zone.private-zone.dns_name}"
+  type = "A"
+  ttl = 60
+  managed_zone = google_dns_managed_zone.private-zone.name
+  rrdatas = [element(var.gcp_infra_ip, count.index)]
+
+  count = var.gcp_infra_count
+}

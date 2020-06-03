@@ -30,6 +30,10 @@ variable "ssl_wildcard_public_ip" {
   type = string
 }
 
+variable "gcp_bootstrap_ip" {
+  type = string
+}
+
 variable "gcp_master_count" {
   type = string
 }
